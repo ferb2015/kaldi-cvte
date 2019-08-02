@@ -1,0 +1,407 @@
+-------------------
+steps/make_mfcc.sh --nj 32 --cmd run.pl data/mfcc/train exp/make_mfcc/train mfcc/train
+utils/validate_data_dir.sh: Successfully validated data-directory data/mfcc/train
+steps/make_mfcc.sh: [info]: no segments file exists: assuming wav.scp indexed by utterance.
+steps/make_mfcc.sh: Succeeded creating MFCC features for train
+steps/compute_cmvn_stats.sh data/mfcc/train exp/mfcc_cmvn/train mfcc/train
+Succeeded creating CMVN stats for train
+steps/make_mfcc.sh --nj 32 --cmd run.pl data/mfcc/dev exp/make_mfcc/dev mfcc/dev
+utils/validate_data_dir.sh: Successfully validated data-directory data/mfcc/dev
+steps/make_mfcc.sh: [info]: no segments file exists: assuming wav.scp indexed by utterance.
+steps/make_mfcc.sh: Succeeded creating MFCC features for dev
+steps/compute_cmvn_stats.sh data/mfcc/dev exp/mfcc_cmvn/dev mfcc/dev
+Succeeded creating CMVN stats for dev
+steps/make_mfcc.sh --nj 32 --cmd run.pl data/mfcc/test exp/make_mfcc/test mfcc/test
+utils/validate_data_dir.sh: Successfully validated data-directory data/mfcc/test
+steps/make_mfcc.sh: [info]: no segments file exists: assuming wav.scp indexed by utterance.
+steps/make_mfcc.sh: Succeeded creating MFCC features for test
+steps/compute_cmvn_stats.sh data/mfcc/test exp/mfcc_cmvn/test mfcc/test
+Succeeded creating CMVN stats for test
+-------------------
+make word graph ...
+utils/prepare_lang.sh --position_dependent_phones false data/dict <SPOKEN_NOISE> data/local/lang data/lang
+Checking data/dict/silence_phones.txt ...
+--> reading data/dict/silence_phones.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> data/dict/silence_phones.txt is OK
+
+Checking data/dict/optional_silence.txt ...
+--> reading data/dict/optional_silence.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> data/dict/optional_silence.txt is OK
+
+Checking data/dict/nonsilence_phones.txt ...
+--> reading data/dict/nonsilence_phones.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> data/dict/nonsilence_phones.txt is OK
+
+Checking disjoint: silence_phones.txt, nonsilence_phones.txt
+--> disjoint property is OK.
+
+Checking data/dict/lexicon.txt
+--> reading data/dict/lexicon.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> data/dict/lexicon.txt is OK
+
+Checking data/dict/extra_questions.txt ...
+--> reading data/dict/extra_questions.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> data/dict/extra_questions.txt is OK
+--> SUCCESS [validating dictionary directory data/dict]
+
+**Creating data/dict/lexiconp.txt from data/dict/lexicon.txt
+fstaddselfloops data/lang/phones/wdisambig_phones.int data/lang/phones/wdisambig_words.int 
+prepare_lang.sh: validating output directory
+utils/validate_lang.pl data/lang
+Checking existence of separator file
+separator file data/lang/subword_separator.txt is empty or does not exist, deal in word case.
+Checking data/lang/phones.txt ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> data/lang/phones.txt is OK
+
+Checking words.txt: #0 ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> data/lang/words.txt is OK
+
+Checking disjoint: silence.txt, nonsilence.txt, disambig.txt ...
+--> silence.txt and nonsilence.txt are disjoint
+--> silence.txt and disambig.txt are disjoint
+--> disambig.txt and nonsilence.txt are disjoint
+--> disjoint property is OK
+
+Checking sumation: silence.txt, nonsilence.txt, disambig.txt ...
+--> found no unexplainable phones in phones.txt
+
+Checking data/lang/phones/context_indep.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in data/lang/phones/context_indep.txt
+--> data/lang/phones/context_indep.int corresponds to data/lang/phones/context_indep.txt
+--> data/lang/phones/context_indep.csl corresponds to data/lang/phones/context_indep.txt
+--> data/lang/phones/context_indep.{txt, int, csl} are OK
+
+Checking data/lang/phones/nonsilence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 217 entry/entries in data/lang/phones/nonsilence.txt
+--> data/lang/phones/nonsilence.int corresponds to data/lang/phones/nonsilence.txt
+--> data/lang/phones/nonsilence.csl corresponds to data/lang/phones/nonsilence.txt
+--> data/lang/phones/nonsilence.{txt, int, csl} are OK
+
+Checking data/lang/phones/silence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in data/lang/phones/silence.txt
+--> data/lang/phones/silence.int corresponds to data/lang/phones/silence.txt
+--> data/lang/phones/silence.csl corresponds to data/lang/phones/silence.txt
+--> data/lang/phones/silence.{txt, int, csl} are OK
+
+Checking data/lang/phones/optional_silence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in data/lang/phones/optional_silence.txt
+--> data/lang/phones/optional_silence.int corresponds to data/lang/phones/optional_silence.txt
+--> data/lang/phones/optional_silence.csl corresponds to data/lang/phones/optional_silence.txt
+--> data/lang/phones/optional_silence.{txt, int, csl} are OK
+
+Checking data/lang/phones/disambig.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 57 entry/entries in data/lang/phones/disambig.txt
+--> data/lang/phones/disambig.int corresponds to data/lang/phones/disambig.txt
+--> data/lang/phones/disambig.csl corresponds to data/lang/phones/disambig.txt
+--> data/lang/phones/disambig.{txt, int, csl} are OK
+
+Checking data/lang/phones/roots.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 218 entry/entries in data/lang/phones/roots.txt
+--> data/lang/phones/roots.int corresponds to data/lang/phones/roots.txt
+--> data/lang/phones/roots.{txt, int} are OK
+
+Checking data/lang/phones/sets.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 218 entry/entries in data/lang/phones/sets.txt
+--> data/lang/phones/sets.int corresponds to data/lang/phones/sets.txt
+--> data/lang/phones/sets.{txt, int} are OK
+
+Checking data/lang/phones/extra_questions.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 7 entry/entries in data/lang/phones/extra_questions.txt
+--> data/lang/phones/extra_questions.int corresponds to data/lang/phones/extra_questions.txt
+--> data/lang/phones/extra_questions.{txt, int} are OK
+
+Checking optional_silence.txt ...
+--> reading data/lang/phones/optional_silence.txt
+--> data/lang/phones/optional_silence.txt is OK
+
+Checking disambiguation symbols: #0 and #1
+--> data/lang/phones/disambig.txt has "#0" and "#1"
+--> data/lang/phones/disambig.txt is OK
+
+Checking topo ...
+
+Checking word-level disambiguation symbols...
+--> data/lang/phones/wdisambig.txt exists (newer prepare_lang.sh)
+Checking data/lang/oov.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in data/lang/oov.txt
+--> data/lang/oov.int corresponds to data/lang/oov.txt
+--> data/lang/oov.{txt, int} are OK
+
+--> data/lang/L.fst is olabel sorted
+--> data/lang/L_disambig.fst is olabel sorted
+--> SUCCESS [validating lang directory data/lang]
+Converting 'data/graph/word.3gram.lm.gz' to FST
+arpa2fst --disambig-symbol=#0 --read-symbol-table=data/graph/lang/words.txt - data/graph/lang/G.fst 
+LOG (arpa2fst[5.5]:Read():arpa-file-parser.cc:94) Reading \data\ section.
+LOG (arpa2fst[5.5]:Read():arpa-file-parser.cc:149) Reading \1-grams: section.
+LOG (arpa2fst[5.5]:Read():arpa-file-parser.cc:149) Reading \2-grams: section.
+LOG (arpa2fst[5.5]:Read():arpa-file-parser.cc:149) Reading \3-grams: section.
+LOG (arpa2fst[5.5]:RemoveRedundantStates():arpa-lm-compiler.cc:359) Reduced num-states from 3076353 to 454251
+fstisstochastic data/graph/lang/G.fst 
+-7.27093e-08 -0.832396
+Succeeded in formatting LM: 'data/graph/word.3gram.lm.gz'
+-------------------
+make phone graph ...
+utils/prepare_lang.sh --position_dependent_phones false data/dict_phone <SPOKEN_NOISE> data/local/lang_phone data/lang_phone
+Checking data/dict_phone/silence_phones.txt ...
+--> reading data/dict_phone/silence_phones.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> data/dict_phone/silence_phones.txt is OK
+
+Checking data/dict_phone/optional_silence.txt ...
+--> reading data/dict_phone/optional_silence.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> data/dict_phone/optional_silence.txt is OK
+
+Checking data/dict_phone/nonsilence_phones.txt ...
+--> reading data/dict_phone/nonsilence_phones.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> data/dict_phone/nonsilence_phones.txt is OK
+
+Checking disjoint: silence_phones.txt, nonsilence_phones.txt
+--> disjoint property is OK.
+
+Checking data/dict_phone/lexicon.txt
+--> reading data/dict_phone/lexicon.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> data/dict_phone/lexicon.txt is OK
+
+Checking data/dict_phone/extra_questions.txt ...
+--> reading data/dict_phone/extra_questions.txt
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> data/dict_phone/extra_questions.txt is OK
+--> SUCCESS [validating dictionary directory data/dict_phone]
+
+**Creating data/dict_phone/lexiconp.txt from data/dict_phone/lexicon.txt
+fstaddselfloops data/lang_phone/phones/wdisambig_phones.int data/lang_phone/phones/wdisambig_words.int 
+prepare_lang.sh: validating output directory
+utils/validate_lang.pl data/lang_phone
+Checking existence of separator file
+separator file data/lang_phone/subword_separator.txt is empty or does not exist, deal in word case.
+Checking data/lang_phone/phones.txt ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> data/lang_phone/phones.txt is OK
+
+Checking words.txt: #0 ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> data/lang_phone/words.txt is OK
+
+Checking disjoint: silence.txt, nonsilence.txt, disambig.txt ...
+--> silence.txt and nonsilence.txt are disjoint
+--> silence.txt and disambig.txt are disjoint
+--> disambig.txt and nonsilence.txt are disjoint
+--> disjoint property is OK
+
+Checking sumation: silence.txt, nonsilence.txt, disambig.txt ...
+--> found no unexplainable phones in phones.txt
+
+Checking data/lang_phone/phones/context_indep.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in data/lang_phone/phones/context_indep.txt
+--> data/lang_phone/phones/context_indep.int corresponds to data/lang_phone/phones/context_indep.txt
+--> data/lang_phone/phones/context_indep.csl corresponds to data/lang_phone/phones/context_indep.txt
+--> data/lang_phone/phones/context_indep.{txt, int, csl} are OK
+
+Checking data/lang_phone/phones/nonsilence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 217 entry/entries in data/lang_phone/phones/nonsilence.txt
+--> data/lang_phone/phones/nonsilence.int corresponds to data/lang_phone/phones/nonsilence.txt
+--> data/lang_phone/phones/nonsilence.csl corresponds to data/lang_phone/phones/nonsilence.txt
+--> data/lang_phone/phones/nonsilence.{txt, int, csl} are OK
+
+Checking data/lang_phone/phones/silence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in data/lang_phone/phones/silence.txt
+--> data/lang_phone/phones/silence.int corresponds to data/lang_phone/phones/silence.txt
+--> data/lang_phone/phones/silence.csl corresponds to data/lang_phone/phones/silence.txt
+--> data/lang_phone/phones/silence.{txt, int, csl} are OK
+
+Checking data/lang_phone/phones/optional_silence.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in data/lang_phone/phones/optional_silence.txt
+--> data/lang_phone/phones/optional_silence.int corresponds to data/lang_phone/phones/optional_silence.txt
+--> data/lang_phone/phones/optional_silence.csl corresponds to data/lang_phone/phones/optional_silence.txt
+--> data/lang_phone/phones/optional_silence.{txt, int, csl} are OK
+
+Checking data/lang_phone/phones/disambig.{txt, int, csl} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 4 entry/entries in data/lang_phone/phones/disambig.txt
+--> data/lang_phone/phones/disambig.int corresponds to data/lang_phone/phones/disambig.txt
+--> data/lang_phone/phones/disambig.csl corresponds to data/lang_phone/phones/disambig.txt
+--> data/lang_phone/phones/disambig.{txt, int, csl} are OK
+
+Checking data/lang_phone/phones/roots.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 218 entry/entries in data/lang_phone/phones/roots.txt
+--> data/lang_phone/phones/roots.int corresponds to data/lang_phone/phones/roots.txt
+--> data/lang_phone/phones/roots.{txt, int} are OK
+
+Checking data/lang_phone/phones/sets.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 218 entry/entries in data/lang_phone/phones/sets.txt
+--> data/lang_phone/phones/sets.int corresponds to data/lang_phone/phones/sets.txt
+--> data/lang_phone/phones/sets.{txt, int} are OK
+
+Checking data/lang_phone/phones/extra_questions.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 7 entry/entries in data/lang_phone/phones/extra_questions.txt
+--> data/lang_phone/phones/extra_questions.int corresponds to data/lang_phone/phones/extra_questions.txt
+--> data/lang_phone/phones/extra_questions.{txt, int} are OK
+
+Checking optional_silence.txt ...
+--> reading data/lang_phone/phones/optional_silence.txt
+--> data/lang_phone/phones/optional_silence.txt is OK
+
+Checking disambiguation symbols: #0 and #1
+--> data/lang_phone/phones/disambig.txt has "#0" and "#1"
+--> data/lang_phone/phones/disambig.txt is OK
+
+Checking topo ...
+
+Checking word-level disambiguation symbols...
+--> data/lang_phone/phones/wdisambig.txt exists (newer prepare_lang.sh)
+Checking data/lang_phone/oov.{txt, int} ...
+--> text seems to be UTF-8 or ASCII, checking whitespaces
+--> text contains only allowed whitespaces
+--> 1 entry/entries in data/lang_phone/oov.txt
+--> data/lang_phone/oov.int corresponds to data/lang_phone/oov.txt
+--> data/lang_phone/oov.{txt, int} are OK
+
+--> data/lang_phone/L.fst is olabel sorted
+--> data/lang_phone/L_disambig.fst is olabel sorted
+--> SUCCESS [validating lang directory data/lang_phone]
+Converting 'data/graph_phone/phone.3gram.lm.gz' to FST
+arpa2fst --disambig-symbol=#0 --read-symbol-table=data/graph_phone/lang/words.txt - data/graph_phone/lang/G.fst 
+LOG (arpa2fst[5.5]:Read():arpa-file-parser.cc:94) Reading \data\ section.
+LOG (arpa2fst[5.5]:Read():arpa-file-parser.cc:149) Reading \1-grams: section.
+LOG (arpa2fst[5.5]:Read():arpa-file-parser.cc:149) Reading \2-grams: section.
+LOG (arpa2fst[5.5]:Read():arpa-file-parser.cc:149) Reading \3-grams: section.
+LOG (arpa2fst[5.5]:RemoveRedundantStates():arpa-lm-compiler.cc:359) Reduced num-states from 5709 to 4848
+fstisstochastic data/graph_phone/lang/G.fst 
+1.86678e-07 -3.76792
+Succeeded in formatting LM: 'data/graph_phone/phone.3gram.lm.gz'
+steps/train_mono.sh --boost-silence 1.25 --nj 32 --cmd run.pl data/mfcc/train data/lang exp/mono
+steps/train_mono.sh: Initializing monophone system.
+steps/train_mono.sh: Compiling training graphs
+steps/train_mono.sh: Aligning data equally (pass 0)
+steps/train_mono.sh: Pass 1
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 2
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 3
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 4
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 5
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 6
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 7
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 8
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 9
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 10
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 11
+steps/train_mono.sh: Pass 12
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 13
+steps/train_mono.sh: Pass 14
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 15
+steps/train_mono.sh: Pass 16
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 17
+steps/train_mono.sh: Pass 18
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 19
+steps/train_mono.sh: Pass 20
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 21
+steps/train_mono.sh: Pass 22
+steps/train_mono.sh: Pass 23
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 24
+steps/train_mono.sh: Pass 25
+steps/train_mono.sh: Pass 26
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 27
+steps/train_mono.sh: Pass 28
+steps/train_mono.sh: Pass 29
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 30
+steps/train_mono.sh: Pass 31
+steps/train_mono.sh: Pass 32
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 33
+steps/train_mono.sh: Pass 34
+steps/train_mono.sh: Pass 35
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 36
+steps/train_mono.sh: Pass 37
+steps/train_mono.sh: Pass 38
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 39
+steps/diagnostic/analyze_alignments.sh --cmd run.pl data/lang exp/mono
+steps/diagnostic/analyze_alignments.sh: see stats in exp/mono/log/analyze_alignments.log
+56 warnings in exp/mono/log/acc.*.*.log
+1053 warnings in exp/mono/log/update.*.log
+3974 warnings in exp/mono/log/align.*.*.log
+exp/mono: nj=32 align prob=-100.09 over 25.49h [retry=0.2%, fail=0.0%] states=656 gauss=990
+steps/train_mono.sh: Done training monophone system in exp/mono
+-------------------
+steps/align_si.sh --boost-silence 1.25 --nj 32 --cmd run.pl data/mfcc/train data/lang exp/mono exp/mono_ali
+steps/align_si.sh: feature type is delta
+steps/align_si.sh: aligning data in data/mfcc/train using model from exp/mono, putting alignments in exp/mono_ali
+steps/diagnostic/analyze_alignments.sh --cmd run.pl data/lang exp/mono_ali
+steps/diagnostic/analyze_alignments.sh: see stats in exp/mono_ali/log/analyze_alignments.log
+steps/align_si.sh: done aligning data.

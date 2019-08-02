@@ -1,0 +1,6 @@
+steps/train_mono.sh --nj 1 --cmd utils/run.pl --totgauss 400 data/train_yesno data/lang exp/mono0a
+steps/train_mono.sh: Initializing monophone system.
+feats=ark,s,cs:apply-cmvn --utt2spk=ark:data/train_yesno/split1/JOB/utt2spk scp:data/train_yesno/split1/JOB/cmvn.scp scp:data/train_yesno/split1/JOB/feats.scp ark:- | add-deltas ark:- ark:- |
+lang=data/lang
+feats_dim=
+dir=exp/mono0a

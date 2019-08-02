@@ -1,0 +1,46 @@
+creating data/{train,dev,test}
+cleaning data/train
+preparing scps and text in data/train
+find: '/home/yelong/corpus/data_thchs30/data_thchs30/train': No such file or directory
+cp: cannot stat 'word.txt': No such file or directory
+sort: cannot read: wav.scp: No such file or directory
+sort: cannot read: utt2spk: No such file or directory
+sort: cannot read: text: No such file or directory
+sort: cannot read: phone.txt: No such file or directory
+cleaning data/dev
+preparing scps and text in data/dev
+find: '/home/yelong/corpus/data_thchs30/data_thchs30/dev': No such file or directory
+cp: cannot stat 'word.txt': No such file or directory
+sort: cannot read: wav.scp: No such file or directory
+sort: cannot read: utt2spk: No such file or directory
+sort: cannot read: text: No such file or directory
+sort: cannot read: phone.txt: No such file or directory
+cleaning data/test
+preparing scps and text in data/test
+find: '/home/yelong/corpus/data_thchs30/data_thchs30/test': No such file or directory
+cp: cannot stat 'word.txt': No such file or directory
+sort: cannot read: wav.scp: No such file or directory
+sort: cannot read: utt2spk: No such file or directory
+sort: cannot read: text: No such file or directory
+sort: cannot read: phone.txt: No such file or directory
+creating data/{train,dev,test}
+cleaning data/train
+preparing scps and text in data/train
+cleaning data/dev
+local/thchs-30_data_prep.sh: line 21: cd: /home/yelong/kaldi-master/egs/thchs30/s5/data/dev: No such file or directory
+preparing scps and text in data/dev
+cleaning data/test
+local/thchs-30_data_prep.sh: line 21: cd: /home/yelong/kaldi-master/egs/thchs30/s5/data/test: No such file or directory
+preparing scps and text in data/test
+local/thchs-30_data_prep.sh: line 47: data/dev/spk2utt: No such file or directory
+local/thchs-30_data_prep.sh: line 48: data/test/spk2utt: No such file or directory
+creating test_phone for phone decoding
+cp: cannot stat 'data/test': No such file or directory
+creating data/{train,dev,test}
+cleaning data/train
+preparing scps and text in data/train
+cleaning data/dev
+preparing scps and text in data/dev
+cleaning data/test
+preparing scps and text in data/test
+creating test_phone for phone decoding
