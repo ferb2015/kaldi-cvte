@@ -405,3 +405,288 @@ steps/align_si.sh: aligning data in data/mfcc/train using model from exp/mono, p
 steps/diagnostic/analyze_alignments.sh --cmd run.pl data/lang exp/mono_ali
 steps/diagnostic/analyze_alignments.sh: see stats in exp/mono_ali/log/analyze_alignments.log
 steps/align_si.sh: done aligning data.
+-------------------
+steps/train_deltas.sh --boost-silence 1.25 --cmd run.pl 2000 10000 data/mfcc/train data/lang exp/mono_ali exp/tri1
+steps/train_deltas.sh: accumulating tree stats
+-------------------
+steps/train_deltas.sh --boost-silence 1.25 --cmd run.pl 2000 10000 data/mfcc/train data/lang exp/mono_ali exp/tri1
+steps/train_deltas.sh: accumulating tree stats
+steps/train_deltas.sh: line 174: syntax error: unexpected end of file
+-------------------
+steps/train_deltas.sh --boost-silence 1.25 --cmd run.pl 2000 10000 data/mfcc/train data/lang exp/mono_ali exp/tri1
+steps/train_deltas.sh: accumulating tree stats
+steps/train_deltas.sh: getting questions for tree-building, via clustering
+steps/train_deltas.sh: building the tree
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 109 with no stats; corresponding phone list: 110 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 121 with no stats; corresponding phone list: 122 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 163 with no stats; corresponding phone list: 164 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 175 with no stats; corresponding phone list: 176 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 176 with no stats; corresponding phone list: 177 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 177 with no stats; corresponding phone list: 178 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 182 with no stats; corresponding phone list: 183 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 203 with no stats; corresponding phone list: 204 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 208 with no stats; corresponding phone list: 209 
+** The warnings above about 'no stats' generally mean you have phones **
+** (or groups of phones) in your phone set that had no corresponding data. **
+** You should probably figure out whether something went wrong, **
+** or whether your data just doesn't happen to have examples of those **
+** phones. **
+-------------------
+steps/train_deltas.sh --boost-silence 1.25 --cmd run.pl 2000 10000 data/mfcc/train data/lang exp/mono_ali exp/tri1
+steps/train_deltas.sh: accumulating tree stats
+steps/train_deltas.sh: getting questions for tree-building, via clustering
+steps/train_deltas.sh: building the tree
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 109 with no stats; corresponding phone list: 110 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 121 with no stats; corresponding phone list: 122 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 163 with no stats; corresponding phone list: 164 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 175 with no stats; corresponding phone list: 176 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 176 with no stats; corresponding phone list: 177 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 177 with no stats; corresponding phone list: 178 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 182 with no stats; corresponding phone list: 183 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 203 with no stats; corresponding phone list: 204 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 208 with no stats; corresponding phone list: 209 
+** The warnings above about 'no stats' generally mean you have phones **
+** (or groups of phones) in your phone set that had no corresponding data. **
+** You should probably figure out whether something went wrong, **
+** or whether your data just doesn't happen to have examples of those **
+** phones. **
+steps/train_deltas.sh: converting alignments from exp/mono_ali to use current tree
+steps/train_deltas.sh: compiling graphs of transcripts
+steps/train_deltas.sh: training pass 1
+steps/train_deltas.sh: training pass 2
+steps/train_deltas.sh: training pass 3
+steps/train_deltas.sh: training pass 4
+steps/train_deltas.sh: training pass 5
+steps/train_deltas.sh: training pass 6
+steps/train_deltas.sh: training pass 7
+steps/train_deltas.sh: training pass 8
+steps/train_deltas.sh: training pass 9
+steps/train_deltas.sh: training pass 10
+steps/train_deltas.sh: aligning data
+steps/train_deltas.sh: training pass 11
+steps/train_deltas.sh: training pass 12
+steps/train_deltas.sh: training pass 13
+steps/train_deltas.sh: training pass 14
+steps/train_deltas.sh: training pass 15
+steps/train_deltas.sh: training pass 16
+steps/train_deltas.sh: training pass 17
+steps/train_deltas.sh: training pass 18
+steps/train_deltas.sh: training pass 19
+steps/train_deltas.sh: training pass 20
+steps/train_deltas.sh: aligning data
+steps/train_deltas.sh: training pass 21
+steps/train_deltas.sh: training pass 22
+steps/train_deltas.sh: training pass 23
+steps/train_deltas.sh: training pass 24
+steps/train_deltas.sh: training pass 25
+steps/train_deltas.sh: training pass 26
+steps/train_deltas.sh: training pass 27
+steps/train_deltas.sh: training pass 28
+steps/train_deltas.sh: training pass 29
+steps/train_deltas.sh: training pass 30
+steps/train_deltas.sh: aligning data
+steps/train_deltas.sh: training pass 31
+steps/train_deltas.sh: training pass 32
+steps/train_deltas.sh: training pass 33
+steps/train_deltas.sh: training pass 34
+-------------------
+steps/train_deltas.sh --boost-silence 1.25 --cmd run.pl 2000 10000 data/mfcc/train data/lang exp/mono_ali exp/tri1
+steps/diagnostic/analyze_alignments.sh --cmd run.pl data/lang exp/tri1
+steps/diagnostic/analyze_alignments.sh: see stats in exp/tri1/log/analyze_alignments.log
+1 warnings in exp/tri1/log/compile_questions.log
+291 warnings in exp/tri1/log/update.*.log
+9 warnings in exp/tri1/log/questions.log
+79 warnings in exp/tri1/log/acc.*.*.log
+9 warnings in exp/tri1/log/init_model.log
+104 warnings in exp/tri1/log/align.*.*.log
+1 warnings in exp/tri1/log/build_tree.log
+exp/tri1: nj=32 align prob=-96.74 over 25.48h [retry=0.5%, fail=0.0%] states=1648 gauss=10030 tree-impr=4.76
+steps/train_deltas.sh: Done training system with delta+delta-delta features in exp/tri1
+-------------------
+steps/align_si.sh --nj 32 --cmd run.pl data/mfcc/train data/lang exp/tri1 exp/tri1_ali
+steps/align_si.sh: feature type is delta
+steps/align_si.sh: aligning data in data/mfcc/train using model from exp/tri1, putting alignments in exp/tri1_ali
+steps/diagnostic/analyze_alignments.sh --cmd run.pl data/lang exp/tri1_ali
+steps/diagnostic/analyze_alignments.sh: see stats in exp/tri1_ali/log/analyze_alignments.log
+steps/align_si.sh: done aligning data.
+-------------------
+steps/train_deltas.sh --boost-silence 1.25 --cmd run.pl 2000 10000 data/mfcc/train data/lang exp/mono_ali exp/tri1
+steps/train_deltas.sh: accumulating tree stats
+steps/train_deltas.sh: getting questions for tree-building, via clustering
+steps/train_deltas.sh: building the tree
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 109 with no stats; corresponding phone list: 110 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 121 with no stats; corresponding phone list: 122 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 163 with no stats; corresponding phone list: 164 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 175 with no stats; corresponding phone list: 176 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 176 with no stats; corresponding phone list: 177 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 177 with no stats; corresponding phone list: 178 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 182 with no stats; corresponding phone list: 183 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 203 with no stats; corresponding phone list: 204 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 208 with no stats; corresponding phone list: 209 
+** The warnings above about 'no stats' generally mean you have phones **
+** (or groups of phones) in your phone set that had no corresponding data. **
+** You should probably figure out whether something went wrong, **
+** or whether your data just doesn't happen to have examples of those **
+** phones. **
+-------------------
+steps/train_deltas.sh --boost-silence 1.25 --cmd run.pl 2000 10000 data/mfcc/train data/lang exp/mono_ali exp/tri1
+steps/train_deltas.sh: accumulating tree stats
+steps/train_deltas.sh: getting questions for tree-building, via clustering
+steps/train_deltas.sh: building the tree
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 109 with no stats; corresponding phone list: 110 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 121 with no stats; corresponding phone list: 122 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 163 with no stats; corresponding phone list: 164 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 175 with no stats; corresponding phone list: 176 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 176 with no stats; corresponding phone list: 177 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 177 with no stats; corresponding phone list: 178 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 182 with no stats; corresponding phone list: 183 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 203 with no stats; corresponding phone list: 204 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 208 with no stats; corresponding phone list: 209 
+** The warnings above about 'no stats' generally mean you have phones **
+** (or groups of phones) in your phone set that had no corresponding data. **
+** You should probably figure out whether something went wrong, **
+** or whether your data just doesn't happen to have examples of those **
+** phones. **
+-------------------
+steps/train_mono.sh --boost-silence 1.25 --nj 32 --cmd run.pl data/mfcc/train data/lang exp/mono
+steps/train_mono.sh: Initializing monophone system.
+steps/train_mono.sh: Compiling training graphs
+steps/train_mono.sh: Aligning data equally (pass 0)
+steps/train_mono.sh: Pass 1
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 2
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 3
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 4
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 5
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 6
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 7
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 8
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 9
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 10
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 11
+steps/train_mono.sh: Pass 12
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 13
+steps/train_mono.sh: Pass 14
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 15
+steps/train_mono.sh: Pass 16
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 17
+steps/train_mono.sh: Pass 18
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 19
+steps/train_mono.sh: Pass 20
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 21
+steps/train_mono.sh: Pass 22
+steps/train_mono.sh: Pass 23
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 24
+steps/train_mono.sh: Pass 25
+steps/train_mono.sh: Pass 26
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 27
+steps/train_mono.sh: Pass 28
+steps/train_mono.sh: Pass 29
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 30
+steps/train_mono.sh: Pass 31
+steps/train_mono.sh: Pass 32
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 33
+steps/train_mono.sh: Pass 34
+steps/train_mono.sh: Pass 35
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 36
+steps/train_mono.sh: Pass 37
+steps/train_mono.sh: Pass 38
+steps/train_mono.sh: Aligning data
+steps/train_mono.sh: Pass 39
+steps/diagnostic/analyze_alignments.sh --cmd run.pl data/lang exp/mono
+steps/diagnostic/analyze_alignments.sh: see stats in exp/mono/log/analyze_alignments.log
+56 warnings in exp/mono/log/acc.*.*.log
+1053 warnings in exp/mono/log/update.*.log
+3974 warnings in exp/mono/log/align.*.*.log
+exp/mono: nj=32 align prob=-100.09 over 25.49h [retry=0.2%, fail=0.0%] states=656 gauss=990
+steps/train_mono.sh: Done training monophone system in exp/mono
+-------------------
+steps/train_lda_mllt.sh --cmd run.pl --splice-opts --left-context=3 --right-context=3 2500 15000 data/mfcc/train data/lang exp/tri1_ali exp/tri2b
+steps/train_lda_mllt.sh: Accumulating LDA statistics.
+steps/train_lda_mllt.sh: Accumulating tree stats
+steps/train_lda_mllt.sh: Getting questions for tree clustering.
+steps/train_lda_mllt.sh: Building the tree
+steps/train_lda_mllt.sh: Initializing the model
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 109 with no stats; corresponding phone list: 110 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 121 with no stats; corresponding phone list: 122 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 163 with no stats; corresponding phone list: 164 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 175 with no stats; corresponding phone list: 176 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 176 with no stats; corresponding phone list: 177 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 182 with no stats; corresponding phone list: 183 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 203 with no stats; corresponding phone list: 204 
+WARNING (gmm-init-model[5.5]:InitAmGmm():gmm-init-model.cc:55) Tree has pdf-id 208 with no stats; corresponding phone list: 209 
+This is a bad warning.
+steps/train_lda_mllt.sh: Converting alignments from exp/tri1_ali to use current tree
+steps/train_lda_mllt.sh: Compiling graphs of transcripts
+Training pass 1
+Training pass 2
+steps/train_lda_mllt.sh: Estimating MLLT
+Training pass 3
+Training pass 4
+steps/train_lda_mllt.sh: Estimating MLLT
+Training pass 5
+Training pass 6
+steps/train_lda_mllt.sh: Estimating MLLT
+Training pass 7
+Training pass 8
+Training pass 9
+Training pass 10
+Aligning data
+Training pass 11
+Training pass 12
+steps/train_lda_mllt.sh: Estimating MLLT
+Training pass 13
+Training pass 14
+Training pass 15
+Training pass 16
+Training pass 17
+Training pass 18
+Training pass 19
+Training pass 20
+Aligning data
+Training pass 21
+Training pass 22
+Training pass 23
+Training pass 24
+Training pass 25
+Training pass 26
+Training pass 27
+Training pass 28
+Training pass 29
+Training pass 30
+Aligning data
+Training pass 31
+Training pass 32
+Training pass 33
+Training pass 34
+steps/diagnostic/analyze_alignments.sh --cmd run.pl data/lang exp/tri2b
+steps/diagnostic/analyze_alignments.sh: see stats in exp/tri2b/log/analyze_alignments.log
+136 warnings in exp/tri2b/log/acc.*.*.log
+247 warnings in exp/tri2b/log/update.*.log
+8 warnings in exp/tri2b/log/questions.log
+206 warnings in exp/tri2b/log/align.*.*.log
+1 warnings in exp/tri2b/log/build_tree.log
+9 warnings in exp/tri2b/log/init_model.log
+1 warnings in exp/tri2b/log/compile_questions.log
+4 warnings in exp/tri2b/log/lda_acc.*.log
+exp/tri2b: nj=32 align prob=-48.18 over 25.48h [retry=0.7%, fail=0.0%] states=2104 gauss=15034 tree-impr=4.33 lda-sum=23.90 mllt:impr,logdet=1.18,1.68
+steps/train_lda_mllt.sh: Done training system with LDA+MLLT features in exp/tri2b

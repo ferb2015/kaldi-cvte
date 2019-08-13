@@ -82,8 +82,9 @@ if [ $stage -le -3 ]; then
     --ci-phones=$ciphonelist $alidir/final.mdl "$feats" \
     "ark:gunzip -c $alidir/ali.JOB.gz|" $dir/JOB.treeacc || exit 1;
   sum-tree-stats $dir/treeacc $dir/*.treeacc 2>$dir/log/sum_tree_acc.log || exit 1;
-  rm $dir/*.treeacc
+  #rm $dir/*.treeacc
 fi
+exit 0
 
 if [ $stage -le -2 ]; then
   echo "$0: getting questions for tree-building, via clustering"
@@ -112,7 +113,7 @@ if [ $stage -le -2 ]; then
   fi
 
   gmm-mixup --mix-up=$numgauss $dir/1.mdl $dir/1.occs $dir/1.mdl 2>$dir/log/mixup.log || exit 1;
-  rm $dir/treeacc
+  #rm $dir/treeacc
 fi
 
 if [ $stage -le -1 ]; then
@@ -169,5 +170,4 @@ utils/summarize_warnings.pl  $dir/log
 steps/info/gmm_dir_info.pl $dir
 
 echo "$0: Done training system with delta+delta-delta features in $dir"
-
 exit 0

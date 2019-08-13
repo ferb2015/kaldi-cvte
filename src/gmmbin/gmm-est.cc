@@ -121,9 +121,10 @@ int main(int argc, char *argv[]) {
       // get pdf occupation counts
       Vector<BaseFloat> pdf_occs;
       pdf_occs.Resize(gmm_accs.NumAccs());
-      for (int i = 0; i < gmm_accs.NumAccs(); i++)
+      for (int i = 0; i < gmm_accs.NumAccs(); i++){
         pdf_occs(i) = gmm_accs.GetAcc(i).occupancy().Sum();
-
+		//KALDI_LOG << "----------------" << pdf_occs(i);
+	  }
       if (mixdown != 0)
         am_gmm.MergeByCount(pdf_occs, mixdown, power, min_count);
 

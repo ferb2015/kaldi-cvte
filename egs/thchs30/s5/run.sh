@@ -70,18 +70,19 @@ local/thchs-30_decode.sh --mono true --nj $n "steps/decode.sh" exp/mono data/mfc
 
 #monophone_ali
 steps/align_si.sh --boost-silence 1.25 --nj $n --cmd "$train_cmd" data/mfcc/train data/lang exp/mono exp/mono_ali || exit 1;
-EOF
+
 #triphone
 steps/train_deltas.sh --boost-silence 1.25 --cmd "$train_cmd" 2000 10000 data/mfcc/train data/lang exp/mono_ali exp/tri1 || exit 1;
 #test tri1 model
-:<<EOF
+
 local/thchs-30_decode.sh --nj $n "steps/decode.sh" exp/tri1 data/mfcc &
 
 #triphone_ali
 steps/align_si.sh --nj $n --cmd "$train_cmd" data/mfcc/train data/lang exp/tri1 exp/tri1_ali || exit 1;
-
+EOF
 #lda_mllt
 steps/train_lda_mllt.sh --cmd "$train_cmd" --splice-opts "--left-context=3 --right-context=3" 2500 15000 data/mfcc/train data/lang exp/tri1_ali exp/tri2b || exit 1;
+:<<EOF
 #test tri2b model
 local/thchs-30_decode.sh --nj $n "steps/decode.sh" exp/tri2b data/mfcc &
 

@@ -105,7 +105,7 @@ fi
 if [ $stage -le 0 ]; then
   gmm-est --min-gaussian-occupancy=3  --mix-up=$numgauss --power=$power \
     $dir/0.mdl "gmm-sum-accs - $dir/0.*.acc|" $dir/1.mdl 2> $dir/log/update.0.log || exit 1;
-  rm $dir/0.*.acc
+  #rm $dir/0.*.acc
 fi
 
 beam=$initial_beam # will change to regular_beam below after 1st pass
@@ -129,7 +129,7 @@ while [ $x -lt $num_iters ]; do
     $cmd $dir/log/update.$x.log \
       gmm-est --write-occs=$dir/$[$x+1].occs --mix-up=$numgauss --power=$power $dir/$x.mdl \
       "gmm-sum-accs - $dir/$x.*.acc|" $dir/$[$x+1].mdl || exit 1;
-    rm $dir/$x.mdl $dir/$x.*.acc $dir/$x.occs 2>/dev/null
+    #rm $dir/$x.mdl $dir/$x.*.acc $dir/$x.occs 2>/dev/null
   fi
   if [ $x -le $max_iter_inc ]; then
      numgauss=$[$numgauss+$incgauss];
