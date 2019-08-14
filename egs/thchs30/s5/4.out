@@ -690,3 +690,416 @@ steps/diagnostic/analyze_alignments.sh: see stats in exp/tri2b/log/analyze_align
 4 warnings in exp/tri2b/log/lda_acc.*.log
 exp/tri2b: nj=32 align prob=-48.18 over 25.48h [retry=0.7%, fail=0.0%] states=2104 gauss=15034 tree-impr=4.33 lda-sum=23.90 mllt:impr,logdet=1.18,1.68
 steps/train_lda_mllt.sh: Done training system with LDA+MLLT features in exp/tri2b
+-------------------
+steps/align_si.sh --nj 32 --cmd run.pl --use-graphs true data/mfcc/train data/lang exp/tri2b exp/tri2b_ali
+steps/align_si.sh: feature type is lda
+steps/align_si.sh: aligning data in data/mfcc/train using model from exp/tri2b, putting alignments in exp/tri2b_ali
+steps/diagnostic/analyze_alignments.sh --cmd run.pl data/lang exp/tri2b_ali
+steps/diagnostic/analyze_alignments.sh: see stats in exp/tri2b_ali/log/analyze_alignments.log
+steps/align_si.sh: done aligning data.
+-------------------
+tree-info exp/tri2b/tree 
+tree-info exp/tri2b/tree 
+fstpushspecial 
+fsttablecompose data/graph/lang/L_disambig.fst data/graph/lang/G.fst 
+fstminimizeencoded 
+fstdeterminizestar --use-log=true 
+fstisstochastic data/graph/lang/tmp/LG.fst 
+-0.0480882 -0.0488869
+[info]: LG not stochastic.
+fstcomposecontext --context-size=3 --central-position=1 --read-disambig-syms=data/graph/lang/phones/disambig.int --write-disambig-syms=data/graph/lang/tmp/disambig_ilabels_3_1.int data/graph/lang/tmp/ilabels_3_1.55734 data/graph/lang/tmp/LG.fst 
+fstisstochastic data/graph/lang/tmp/CLG_3_1.fst 
+0 -0.0488869
+[info]: CLG not stochastic.
+make-h-transducer --disambig-syms-out=exp/tri2b/graph_word/disambig_tid.int --transition-scale=1.0 data/graph/lang/tmp/ilabels_3_1 exp/tri2b/tree exp/tri2b/final.mdl 
+fstrmepslocal 
+fstminimizeencoded 
+fsttablecompose exp/tri2b/graph_word/Ha.fst data/graph/lang/tmp/CLG_3_1.fst 
+fstrmsymbols exp/tri2b/graph_word/disambig_tid.int 
+fstdeterminizestar --use-log=true 
+fstisstochastic exp/tri2b/graph_word/HCLGa.fst 
+0.644531 -0.128776
+HCLGa is not stochastic
+add-self-loops --self-loop-scale=0.1 --reorder=true exp/tri2b/final.mdl exp/tri2b/graph_word/HCLGa.fst 
+steps/decode.sh --cmd run.pl --nj 32 exp/tri2b/graph_word data/mfcc/test exp/tri2b/decode_test_word
+utils/split_scp.pl: Refusing to split data because number of speakers 10 is less than the number of output .scp files 32
+-------------------
+steps/train_quick.sh --cmd run.pl 4200 40000 data/mfcc/train data/lang exp/tri2b_ali exp/tri4b
+steps/train_quick.sh: feature type is lda
+steps/train_quick.sh: accumulating tree stats
+steps/train_quick.sh: Getting questions for tree clustering.
+steps/train_quick.sh: Building the tree
+steps/train_quick.sh: Initializing the model
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 109 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 121 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 163 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 175 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 176 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 203 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 208 of new tree has no stats.
+steps/train_quick.sh: This is a bad warning.
+steps/train_quick.sh: mixing up old model.
+steps/train_quick.sh: converting old alignments
+steps/train_quick.sh: compiling training graphs
+steps/train_quick.sh: pass 1
+steps/train_quick.sh: pass 2
+steps/train_quick.sh: pass 3
+steps/train_quick.sh: pass 4
+steps/train_quick.sh: pass 5
+steps/train_quick.sh: pass 6
+steps/train_quick.sh: pass 7
+steps/train_quick.sh: pass 8
+steps/train_quick.sh: pass 9
+steps/train_quick.sh: pass 10
+steps/train_quick.sh: aligning data
+steps/train_quick.sh: pass 11
+steps/train_quick.sh: pass 12
+steps/train_quick.sh: pass 13
+steps/train_quick.sh: pass 14
+steps/train_quick.sh: pass 15
+steps/train_quick.sh: aligning data
+steps/train_quick.sh: pass 16
+steps/train_quick.sh: pass 17
+steps/train_quick.sh: pass 18
+steps/train_quick.sh: pass 19
+Done
+steps/align_fmllr.sh --nj 32 --cmd run.pl data/mfcc/train data/lang exp/tri4b exp/tri4b_ali
+tree-info exp/tri4b/tree 
+cp: cannot stat 'exp/tri4b/final.occs': No such file or directory
+steps/align_fmllr.sh: feature type is lda
+steps/align_fmllr.sh: compiling training graphs
+tree-info exp/tri4b/tree 
+make-h-transducer --disambig-syms-out=exp/tri4b/graph_word/disambig_tid.int --transition-scale=1.0 data/graph/lang/tmp/ilabels_3_1 exp/tri4b/tree exp/tri4b/final.mdl 
+fstdeterminizestar --use-log=true 
+fstrmepslocal 
+fsttablecompose exp/tri4b/graph_word/Ha.fst data/graph/lang/tmp/CLG_3_1.fst 
+fstrmsymbols exp/tri4b/graph_word/disambig_tid.int 
+fstminimizeencoded 
+steps/align_fmllr.sh: aligning data in data/mfcc/train using exp/tri4b/final.mdl and speaker-independent features.
+steps/align_fmllr.sh: computing fMLLR transforms
+steps/align_fmllr.sh: doing final alignment.
+steps/align_fmllr.sh: done aligning data.
+steps/diagnostic/analyze_alignments.sh --cmd run.pl data/lang exp/tri4b_ali
+steps/diagnostic/analyze_alignments.sh: see stats in exp/tri4b_ali/log/analyze_alignments.log
+4 warnings in exp/tri4b_ali/log/fmllr.*.log
+50 warnings in exp/tri4b_ali/log/align_pass2.*.log
+52 warnings in exp/tri4b_ali/log/align_pass1.*.log
+steps/align_fmllr.sh --nj 32 --cmd run.pl data/mfcc/dev data/lang exp/tri4b exp/tri4b_ali_cv
+cp: cannot stat 'exp/tri4b/final.occs': No such file or directory
+steps/align_fmllr.sh: feature type is lda
+steps/align_fmllr.sh: compiling training graphs
+steps/align_fmllr.sh: aligning data in data/mfcc/dev using exp/tri4b/final.mdl and speaker-independent features.
+steps/align_fmllr.sh: computing fMLLR transforms
+steps/align_fmllr.sh: doing final alignment.
+steps/align_fmllr.sh: done aligning data.
+steps/diagnostic/analyze_alignments.sh --cmd run.pl data/lang exp/tri4b_ali_cv
+steps/diagnostic/analyze_alignments.sh: see stats in exp/tri4b_ali_cv/log/analyze_alignments.log
+5 warnings in exp/tri4b_ali_cv/log/align_pass2.*.log
+5 warnings in exp/tri4b_ali_cv/log/align_pass1.*.log
+fstisstochastic exp/tri4b/graph_word/HCLGa.fst 
+0.644531 -0.128776
+HCLGa is not stochastic
+add-self-loops --self-loop-scale=0.1 --reorder=true exp/tri4b/final.mdl exp/tri4b/graph_word/HCLGa.fst 
+steps/decode_fmllr.sh --cmd run.pl --nj 32 exp/tri4b/graph_word data/mfcc/test exp/tri4b/decode_test_word
+utils/split_scp.pl: Refusing to split data because number of speakers 10 is less than the number of output .scp files 32
+-------------------
+utils/mkgraph.sh: exp/tri2b/graph_word/HCLG.fst is up to date.
+steps/decode.sh --cmd run.pl --nj 10 exp/tri2b/graph_word data/mfcc/test exp/tri2b/decode_test_word
+decode.sh: feature type is lda
+steps/diagnostic/analyze_lats.sh --cmd run.pl exp/tri2b/graph_word exp/tri2b/decode_test_word
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri2b/decode_test_word/log/analyze_alignments.log
+Overall, lattice depth (10,50,90-percentile)=(1,9,55) and mean=21.6
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri2b/decode_test_word/log/analyze_lattice_depth_stats.log
+local/score.sh --cmd run.pl data/mfcc/test exp/tri2b/graph_word exp/tri2b/decode_test_word
+local/score.sh: scoring with word insertion penalty=0.0,0.5,1.0
+tree-info exp/tri2b/tree 
+tree-info exp/tri2b/tree 
+fstdeterminizestar --use-log=true 
+fstpushspecial 
+fstminimizeencoded 
+fsttablecompose data/graph_phone/lang/L_disambig.fst data/graph_phone/lang/G.fst 
+fstisstochastic data/graph_phone/lang/tmp/LG.fst 
+-0.264706 -0.265648
+[info]: LG not stochastic.
+fstcomposecontext --context-size=3 --central-position=1 --read-disambig-syms=data/graph_phone/lang/phones/disambig.int --write-disambig-syms=data/graph_phone/lang/tmp/disambig_ilabels_3_1.int data/graph_phone/lang/tmp/ilabels_3_1.29624 data/graph_phone/lang/tmp/LG.fst 
+fstisstochastic data/graph_phone/lang/tmp/CLG_3_1.fst 
+0 -0.265648
+[info]: CLG not stochastic.
+make-h-transducer --disambig-syms-out=exp/tri2b/graph_phone/disambig_tid.int --transition-scale=1.0 data/graph_phone/lang/tmp/ilabels_3_1 exp/tri2b/tree exp/tri2b/final.mdl 
+fstrmepslocal 
+fstrmsymbols exp/tri2b/graph_phone/disambig_tid.int 
+fsttablecompose exp/tri2b/graph_phone/Ha.fst data/graph_phone/lang/tmp/CLG_3_1.fst 
+fstminimizeencoded 
+fstdeterminizestar --use-log=true 
+fstisstochastic exp/tri2b/graph_phone/HCLGa.fst 
+0.000483027 -0.797881
+HCLGa is not stochastic
+add-self-loops --self-loop-scale=0.1 --reorder=true exp/tri2b/final.mdl exp/tri2b/graph_phone/HCLGa.fst 
+steps/decode.sh --cmd run.pl --nj 10 exp/tri2b/graph_phone data/mfcc/test_phone exp/tri2b/decode_test_phone
+decode.sh: feature type is lda
+steps/diagnostic/analyze_lats.sh --cmd run.pl exp/tri2b/graph_phone exp/tri2b/decode_test_phone
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri2b/decode_test_phone/log/analyze_alignments.log
+Overall, lattice depth (10,50,90-percentile)=(2,7,23) and mean=11.0
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri2b/decode_test_phone/log/analyze_lattice_depth_stats.log
+local/score.sh --cmd run.pl data/mfcc/test_phone exp/tri2b/graph_phone exp/tri2b/decode_test_phone
+local/score.sh: scoring with word insertion penalty=0.0,0.5,1.0
+-------------------
+steps/train_quick.sh --cmd run.pl 4200 40000 data/mfcc/train data/lang exp/tri2b_ali exp/tri4b
+steps/train_quick.sh: feature type is lda
+steps/train_quick.sh: accumulating tree stats
+steps/train_quick.sh: Getting questions for tree clustering.
+steps/train_quick.sh: Building the tree
+steps/train_quick.sh: Initializing the model
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 109 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 121 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 163 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 175 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 176 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 203 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 208 of new tree has no stats.
+steps/train_quick.sh: This is a bad warning.
+steps/train_quick.sh: mixing up old model.
+steps/train_quick.sh: converting old alignments
+steps/train_quick.sh: compiling training graphs
+steps/train_quick.sh: pass 1
+steps/train_quick.sh: pass 2
+steps/train_quick.sh: pass 3
+steps/train_quick.sh: pass 4
+steps/train_quick.sh: pass 5
+steps/train_quick.sh: pass 6
+steps/train_quick.sh: pass 7
+steps/train_quick.sh: pass 8
+steps/train_quick.sh: pass 9
+steps/train_quick.sh: pass 10
+steps/train_quick.sh: aligning data
+steps/train_quick.sh: pass 11
+steps/train_quick.sh: pass 12
+steps/train_quick.sh: pass 13
+steps/train_quick.sh: pass 14
+steps/train_quick.sh: pass 15
+steps/train_quick.sh: aligning data
+steps/train_quick.sh: pass 16
+steps/train_quick.sh: pass 17
+steps/train_quick.sh: pass 18
+steps/train_quick.sh: pass 19
+Done
+-------------------
+tree-info exp/tri4b/tree 
+tree-info exp/tri4b/tree 
+make-h-transducer --disambig-syms-out=exp/tri4b/graph_word/disambig_tid.int --transition-scale=1.0 data/graph/lang/tmp/ilabels_3_1 exp/tri4b/tree exp/tri4b/final.mdl 
+fstminimizeencoded 
+fstrmsymbols exp/tri4b/graph_word/disambig_tid.int 
+fstrmepslocal 
+fsttablecompose exp/tri4b/graph_word/Ha.fst data/graph/lang/tmp/CLG_3_1.fst 
+fstdeterminizestar --use-log=true 
+fstisstochastic exp/tri4b/graph_word/HCLGa.fst 
+0.644531 -0.128776
+HCLGa is not stochastic
+add-self-loops --self-loop-scale=0.1 --reorder=true exp/tri4b/final.mdl exp/tri4b/graph_word/HCLGa.fst 
+steps/decode_fmllr.sh --cmd run.pl --nj 32 exp/tri4b/graph_word data/mfcc/test exp/tri4b/decode_test_word
+utils/split_scp.pl: Refusing to split data because number of speakers 10 is less than the number of output .scp files 32
+-------------------
+utils/mkgraph.sh: exp/tri4b/graph_word/HCLG.fst is up to date.
+steps/decode_fmllr.sh --cmd run.pl --nj 10 exp/tri4b/graph_word data/mfcc/test exp/tri4b/decode_test_word
+steps/decode.sh --scoring-opts  --num-threads 1 --skip-scoring false --acwt 0.083333 --nj 10 --cmd run.pl --beam 10.0 --model exp/tri4b/final.mdl --max-active 2000 exp/tri4b/graph_word data/mfcc/test exp/tri4b/decode_test_word.si
+decode.sh: feature type is lda
+steps/diagnostic/analyze_lats.sh --cmd run.pl exp/tri4b/graph_word exp/tri4b/decode_test_word.si
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri4b/decode_test_word.si/log/analyze_alignments.log
+Overall, lattice depth (10,50,90-percentile)=(1,6,32) and mean=12.7
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri4b/decode_test_word.si/log/analyze_lattice_depth_stats.log
+local/score.sh --cmd run.pl data/mfcc/test exp/tri4b/graph_word exp/tri4b/decode_test_word.si
+local/score.sh: scoring with word insertion penalty=0.0,0.5,1.0
+steps/decode_fmllr.sh: feature type is lda
+steps/decode_fmllr.sh: getting first-pass fMLLR transforms.
+steps/decode_fmllr.sh: doing main lattice generation phase
+steps/decode_fmllr.sh: estimating fMLLR transforms a second time.
+steps/decode_fmllr.sh: doing a final pass of acoustic rescoring.
+steps/diagnostic/analyze_lats.sh --cmd run.pl exp/tri4b/graph_word exp/tri4b/decode_test_word
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri4b/decode_test_word/log/analyze_alignments.log
+Overall, lattice depth (10,50,90-percentile)=(1,7,40) and mean=15.5
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri4b/decode_test_word/log/analyze_lattice_depth_stats.log
+local/score.sh --cmd run.pl data/mfcc/test exp/tri4b/graph_word exp/tri4b/decode_test_word
+local/score.sh: scoring with word insertion penalty=0.0,0.5,1.0
+tree-info exp/tri4b/tree 
+tree-info exp/tri4b/tree 
+make-h-transducer --disambig-syms-out=exp/tri4b/graph_phone/disambig_tid.int --transition-scale=1.0 data/graph_phone/lang/tmp/ilabels_3_1 exp/tri4b/tree exp/tri4b/final.mdl 
+fsttablecompose exp/tri4b/graph_phone/Ha.fst data/graph_phone/lang/tmp/CLG_3_1.fst 
+fstrmsymbols exp/tri4b/graph_phone/disambig_tid.int 
+fstminimizeencoded 
+fstdeterminizestar --use-log=true 
+fstrmepslocal 
+fstisstochastic exp/tri4b/graph_phone/HCLGa.fst 
+0.000485708 -0.797813
+HCLGa is not stochastic
+add-self-loops --self-loop-scale=0.1 --reorder=true exp/tri4b/final.mdl exp/tri4b/graph_phone/HCLGa.fst 
+steps/decode_fmllr.sh --cmd run.pl --nj 10 exp/tri4b/graph_phone data/mfcc/test_phone exp/tri4b/decode_test_phone
+steps/decode.sh --scoring-opts  --num-threads 1 --skip-scoring false --acwt 0.083333 --nj 10 --cmd run.pl --beam 10.0 --model exp/tri4b/final.mdl --max-active 2000 exp/tri4b/graph_phone data/mfcc/test_phone exp/tri4b/decode_test_phone.si
+decode.sh: feature type is lda
+steps/diagnostic/analyze_lats.sh --cmd run.pl exp/tri4b/graph_phone exp/tri4b/decode_test_phone.si
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri4b/decode_test_phone.si/log/analyze_alignments.log
+Overall, lattice depth (10,50,90-percentile)=(2,5,16) and mean=7.4
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri4b/decode_test_phone.si/log/analyze_lattice_depth_stats.log
+local/score.sh --cmd run.pl data/mfcc/test_phone exp/tri4b/graph_phone exp/tri4b/decode_test_phone.si
+local/score.sh: scoring with word insertion penalty=0.0,0.5,1.0
+steps/decode_fmllr.sh: feature type is lda
+steps/decode_fmllr.sh: getting first-pass fMLLR transforms.
+steps/decode_fmllr.sh: doing main lattice generation phase
+steps/decode_fmllr.sh: estimating fMLLR transforms a second time.
+steps/decode_fmllr.sh: doing a final pass of acoustic rescoring.
+steps/diagnostic/analyze_lats.sh --cmd run.pl exp/tri4b/graph_phone exp/tri4b/decode_test_phone
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri4b/decode_test_phone/log/analyze_alignments.log
+Overall, lattice depth (10,50,90-percentile)=(2,5,16) and mean=7.9
+steps/diagnostic/analyze_lats.sh: see stats in exp/tri4b/decode_test_phone/log/analyze_lattice_depth_stats.log
+local/score.sh --cmd run.pl data/mfcc/test_phone exp/tri4b/graph_phone exp/tri4b/decode_test_phone
+local/score.sh: scoring with word insertion penalty=0.0,0.5,1.0
+-------------------
+steps/align_fmllr.sh --nj 10 --cmd run.pl data/mfcc/train data/lang exp/tri4b exp/tri4b_ali
+cp: cannot stat 'exp/tri4b/final.occs': No such file or directory
+steps/align_fmllr.sh: feature type is lda
+steps/align_fmllr.sh: compiling training graphs
+steps/align_fmllr.sh: aligning data in data/mfcc/train using exp/tri4b/final.mdl and speaker-independent features.
+steps/align_fmllr.sh: computing fMLLR transforms
+steps/align_fmllr.sh: doing final alignment.
+steps/align_fmllr.sh: done aligning data.
+steps/diagnostic/analyze_alignments.sh --cmd run.pl data/lang exp/tri4b_ali
+steps/diagnostic/analyze_alignments.sh: see stats in exp/tri4b_ali/log/analyze_alignments.log
+6 warnings in exp/tri4b_ali/log/fmllr.*.log
+83 warnings in exp/tri4b_ali/log/align_pass2.*.log
+87 warnings in exp/tri4b_ali/log/align_pass1.*.log
+steps/align_fmllr.sh --nj 10 --cmd run.pl data/mfcc/dev data/lang exp/tri4b exp/tri4b_ali_cv
+cp: cannot stat 'exp/tri4b/final.occs': No such file or directory
+steps/align_fmllr.sh: feature type is lda
+steps/align_fmllr.sh: compiling training graphs
+steps/align_fmllr.sh: aligning data in data/mfcc/dev using exp/tri4b/final.mdl and speaker-independent features.
+steps/align_fmllr.sh: computing fMLLR transforms
+steps/align_fmllr.sh: doing final alignment.
+steps/align_fmllr.sh: done aligning data.
+steps/diagnostic/analyze_alignments.sh --cmd run.pl data/lang exp/tri4b_ali_cv
+steps/diagnostic/analyze_alignments.sh: see stats in exp/tri4b_ali_cv/log/analyze_alignments.log
+8 warnings in exp/tri4b_ali_cv/log/align_pass2.*.log
+8 warnings in exp/tri4b_ali_cv/log/align_pass1.*.log
+-------------------
+steps/train_quick.sh --cmd run.pl 4200 40000 data/mfcc/train data/lang exp/tri2b_ali exp/tri4b
+ls: cannot access exp/tri4b/*.treeacc: No such file or directory
+ls: cannot access exp/tri4b/.*.acc: No such file or directory
+steps/train_quick.sh: estimating alignment model
+run.pl: 32 / 32 failed, log is in exp/tri4b/log/acc_alimdl.*.log
+-------------------
+steps/train_quick.sh --cmd run.pl 4200 40000 data/mfcc/train data/lang exp/tri2b_ali exp/tri4b
+steps/train_quick.sh: feature type is lda
+steps/train_quick.sh: accumulating tree stats
+steps/train_quick.sh: Getting questions for tree clustering.
+steps/train_quick.sh: Building the tree
+steps/train_quick.sh: Initializing the model
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 109 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 121 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 163 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 175 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 176 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 203 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 208 of new tree has no stats.
+steps/train_quick.sh: This is a bad warning.
+steps/train_quick.sh: mixing up old model.
+steps/train_quick.sh: converting old alignments
+steps/train_quick.sh: compiling training graphs
+steps/train_quick.sh: pass 1
+steps/train_quick.sh: pass 2
+steps/train_quick.sh: pass 3
+steps/train_quick.sh: pass 4
+steps/train_quick.sh: pass 5
+steps/train_quick.sh: pass 6
+steps/train_quick.sh: pass 7
+steps/train_quick.sh: pass 8
+steps/train_quick.sh: pass 9
+steps/train_quick.sh: pass 10
+steps/train_quick.sh: aligning data
+steps/train_quick.sh: pass 11
+steps/train_quick.sh: pass 12
+steps/train_quick.sh: pass 13
+steps/train_quick.sh: pass 14
+steps/train_quick.sh: pass 15
+steps/train_quick.sh: aligning data
+steps/train_quick.sh: pass 16
+steps/train_quick.sh: pass 17
+steps/train_quick.sh: pass 18
+steps/train_quick.sh: pass 19
+steps/train_quick.sh: estimating alignment model
+Done
+-------------------
+steps/align_fmllr.sh --nj 10 --cmd run.pl data/mfcc/train data/lang exp/tri4b exp/tri4b_ali
+steps/align_fmllr.sh: feature type is lda
+steps/align_fmllr.sh: compiling training graphs
+steps/align_fmllr.sh: aligning data in data/mfcc/train using exp/tri4b/final.alimdl and speaker-independent features.
+steps/align_fmllr.sh: computing fMLLR transforms
+steps/align_fmllr.sh: doing final alignment.
+steps/align_fmllr.sh: done aligning data.
+steps/diagnostic/analyze_alignments.sh --cmd run.pl data/lang exp/tri4b_ali
+steps/diagnostic/analyze_alignments.sh: see stats in exp/tri4b_ali/log/analyze_alignments.log
+6 warnings in exp/tri4b_ali/log/fmllr.*.log
+83 warnings in exp/tri4b_ali/log/align_pass2.*.log
+85 warnings in exp/tri4b_ali/log/align_pass1.*.log
+-------------------
+steps/train_quick.sh --cmd run.pl 4200 40000 data/mfcc/train data/lang exp/tri2b_ali exp/tri4b
+steps/train_quick.sh: feature type is lda
+steps/train_quick.sh: accumulating tree stats
+steps/train_quick.sh: Getting questions for tree clustering.
+steps/train_quick.sh: Building the tree
+steps/train_quick.sh: Initializing the model
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 109 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 121 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 163 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 175 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 176 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 203 of new tree has no stats.
+WARNING (gmm-init-model[5.5]:InitAmGmmFromOld():gmm-init-model.cc:147) Leaf 208 of new tree has no stats.
+steps/train_quick.sh: This is a bad warning.
+steps/train_quick.sh: mixing up old model.
+steps/train_quick.sh: converting old alignments
+steps/train_quick.sh: compiling training graphs
+steps/train_quick.sh: pass 1
+steps/train_quick.sh: pass 2
+steps/train_quick.sh: pass 3
+steps/train_quick.sh: pass 4
+steps/train_quick.sh: pass 5
+steps/train_quick.sh: pass 6
+steps/train_quick.sh: pass 7
+steps/train_quick.sh: pass 8
+steps/train_quick.sh: pass 9
+steps/train_quick.sh: pass 10
+steps/train_quick.sh: aligning data
+steps/train_quick.sh: pass 11
+steps/train_quick.sh: pass 12
+steps/train_quick.sh: pass 13
+steps/train_quick.sh: pass 14
+steps/train_quick.sh: pass 15
+steps/train_quick.sh: aligning data
+steps/train_quick.sh: pass 16
+steps/train_quick.sh: pass 17
+steps/train_quick.sh: pass 18
+steps/train_quick.sh: pass 19
+steps/train_quick.sh: estimating alignment model
+ln: failed to create symbolic link 'exp/tri4b/final.alimdl': File exists
+Done
+steps/align_fmllr.sh --nj 32 --cmd run.pl data/mfcc/train data/lang exp/tri4b exp/tri4b_ali
+steps/align_fmllr.sh: feature type is lda
+steps/align_fmllr.sh: compiling training graphs
+steps/align_fmllr.sh: aligning data in data/mfcc/train using exp/tri4b/final.alimdl and speaker-independent features.
+steps/align_fmllr.sh: computing fMLLR transforms
+steps/align_fmllr.sh: doing final alignment.
+steps/align_fmllr.sh: done aligning data.
+steps/diagnostic/analyze_alignments.sh --cmd run.pl data/lang exp/tri4b_ali
+steps/diagnostic/analyze_alignments.sh: see stats in exp/tri4b_ali/log/analyze_alignments.log
+4 warnings in exp/tri4b_ali/log/fmllr.*.log
+50 warnings in exp/tri4b_ali/log/align_pass2.*.log
+50 warnings in exp/tri4b_ali/log/align_pass1.*.log
+steps/align_fmllr.sh --nj 32 --cmd run.pl data/mfcc/dev data/lang exp/tri4b exp/tri4b_ali_cv
+steps/align_fmllr.sh: feature type is lda
+steps/align_fmllr.sh: compiling training graphs
+steps/align_fmllr.sh: aligning data in data/mfcc/dev using exp/tri4b/final.alimdl and speaker-independent features.
+steps/align_fmllr.sh: computing fMLLR transforms
+steps/align_fmllr.sh: doing final alignment.
+steps/align_fmllr.sh: done aligning data.
+steps/diagnostic/analyze_alignments.sh --cmd run.pl data/lang exp/tri4b_ali_cv
+steps/diagnostic/analyze_alignments.sh: see stats in exp/tri4b_ali_cv/log/analyze_alignments.log
+5 warnings in exp/tri4b_ali_cv/log/align_pass2.*.log
+5 warnings in exp/tri4b_ali_cv/log/align_pass1.*.log

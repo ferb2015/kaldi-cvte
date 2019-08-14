@@ -83,6 +83,7 @@ case $feat_type in
     ;;
   *) echo "Invalid feature type $feat_type" && exit 1;
 esac
+
 if [ -f $alidir/trans.1 ]; then
   echo "$0: using transforms from $alidir"
   ln.pl $alidir/trans.* $dir # Link them to dest dir.
@@ -100,7 +101,7 @@ if [ $stage -le -5 ]; then
     "ark:gunzip -c $alidir/ali.JOB.gz|" $dir/JOB.treeacc || exit 1;
   [ "`ls $dir/*.treeacc | wc -w`" -ne "$nj" ] && echo "$0: Wrong #tree-stats" && exit 1;
   sum-tree-stats $dir/treeacc $dir/*.treeacc 2>$dir/log/sum_tree_acc.log || exit 1;
-  rm $dir/*.treeacc
+  #rm $dir/*.treeacc
 fi
 
 if [ $stage -le -4 ]; then
@@ -128,7 +129,7 @@ if [ $stage -le -3 ]; then
     2>$dir/log/init_model.log || exit 1;
 
   grep 'no stats' $dir/log/init_model.log && echo "$0: This is a bad warning.";
-  rm $dir/treeacc
+  #rm $dir/treeacc
 fi
 
 if [ $stage -le -2 ]; then
@@ -137,7 +138,7 @@ if [ $stage -le -2 ]; then
   # since the initial model may have either more or fewer Gaussians than we want.
   gmm-mixup --mix-down=$numgauss --mix-up=$numgauss $dir/tmp.mdl $dir/1.occs $dir/1.mdl \
     2> $dir/log/mixup.log || exit 1;
-  rm $dir/tmp.mdl 
+  #rm $dir/tmp.mdl 
 fi
 
 # Convert alignments to the new tree.
@@ -174,13 +175,13 @@ while [ $x -lt $num_iters ]; do
     $cmd $dir/log/update.$x.log \
       gmm-est --write-occs=$dir/$[$x+1].occs --mix-up=$numgauss $dir/$x.mdl \
       "gmm-sum-accs - $dir/$x.*.acc |" $dir/$[$x+1].mdl || exit 1;
-    rm $dir/$x.mdl $dir/$x.*.acc $dir/$x.occs
+    #rm $dir/$x.mdl $dir/$x.*.acc $dir/$x.occs
   fi
   [[ $x -le $maxiterinc ]] && numgauss=$[$numgauss+$incgauss];
   x=$[$x+1];
 done
 
-if [ -f $alidir/trans.1 ]; then
+if [ $stage -le 0 ]; then
   echo "$0: estimating alignment model"
   $cmd JOB=1:$nj $dir/log/acc_alimdl.JOB.log \
     ali-to-post "ark:gunzip -c $dir/ali.JOB.gz|" ark:-  \| \
@@ -191,8 +192,8 @@ if [ -f $alidir/trans.1 ]; then
   $cmd $dir/log/est_alimdl.log \
     gmm-est --write-occs=$dir/final.occs --remove-low-count-gaussians=false $dir/$x.mdl \
     "gmm-sum-accs - $dir/$x.*.acc|" $dir/$x.alimdl || exit 1;
-  rm $dir/$x.*.acc
-  rm $dir/final.alimdl 2>/dev/null 
+  #rm $dir/$x.*.acc
+  #rm $dir/final.alimdl 2>/dev/null 
   ln -s $x.alimdl $dir/final.alimdl
 fi
 

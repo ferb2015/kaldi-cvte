@@ -79,13 +79,12 @@ local/thchs-30_decode.sh --nj $n "steps/decode.sh" exp/tri1 data/mfcc &
 
 #triphone_ali
 steps/align_si.sh --nj $n --cmd "$train_cmd" data/mfcc/train data/lang exp/tri1 exp/tri1_ali || exit 1;
-EOF
+
 #lda_mllt
 steps/train_lda_mllt.sh --cmd "$train_cmd" --splice-opts "--left-context=3 --right-context=3" 2500 15000 data/mfcc/train data/lang exp/tri1_ali exp/tri2b || exit 1;
-:<<EOF
-#test tri2b model
-local/thchs-30_decode.sh --nj $n "steps/decode.sh" exp/tri2b data/mfcc &
 
+#test tri2b model
+local/thchs-30_decode.sh --nj $n "steps/decode.sh" exp/tri2b data/mfcc 
 
 #lda_mllt_ali
 steps/align_si.sh  --nj $n --cmd "$train_cmd" --use-graphs true data/mfcc/train data/lang exp/tri2b exp/tri2b_ali || exit 1;
@@ -99,19 +98,21 @@ local/thchs-30_decode.sh --nj $n "steps/decode_fmllr.sh" exp/tri3b data/mfcc &
 steps/align_fmllr.sh --nj $n --cmd "$train_cmd" data/mfcc/train data/lang exp/tri3b exp/tri3b_ali || exit 1;
 
 #quick
-steps/train_quick.sh --cmd "$train_cmd" 4200 40000 data/mfcc/train data/lang exp/tri3b_ali exp/tri4b || exit 1;
+#steps/train_quick.sh --cmd "$train_cmd" 4200 40000 data/mfcc/train data/lang exp/tri3b_ali exp/tri4b || exit 1;
+steps/train_quick.sh --cmd "$train_cmd" 4200 40000 data/mfcc/train data/lang exp/tri2b_ali exp/tri4b || exit 1;
 #test tri4b model
-local/thchs-30_decode.sh --nj $n "steps/decode_fmllr.sh" exp/tri4b data/mfcc &
+
+#local/thchs-30_decode.sh --nj $n "steps/decode_fmllr.sh" exp/tri4b data/mfcc 
 
 #quick_ali
 steps/align_fmllr.sh --nj $n --cmd "$train_cmd" data/mfcc/train data/lang exp/tri4b exp/tri4b_ali || exit 1;
 
 #quick_ali_cv
 steps/align_fmllr.sh --nj $n --cmd "$train_cmd" data/mfcc/dev data/lang exp/tri4b exp/tri4b_ali_cv || exit 1;
-
+EOF
 #train dnn model
 local/nnet/run_dnn.sh --stage 0 --nj $n  exp/tri4b exp/tri4b_ali exp/tri4b_ali_cv || exit 1;
-
+:<<EOF
 #train dae model
 #python2.6 or above is required for noisy data generation.
 #To speed up the process, pyximport for python is recommeded.

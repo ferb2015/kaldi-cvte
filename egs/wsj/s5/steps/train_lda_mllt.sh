@@ -90,10 +90,7 @@ split_data.sh $data $nj || exit 1;
 splicedfeats="ark,s,cs:apply-cmvn $cmvn_opts --utt2spk=ark:$sdata/JOB/utt2spk scp:$sdata/JOB/cmvn.scp scp:$sdata/JOB/feats.scp ark:- | splice-feats $splice_opts ark:- ark:- |"
 # Note: $feats gets overwritten later in the script.
 feats="$splicedfeats transform-feats $dir/0.mat ark:- ark:- |"
-example_feats="`echo $feats | sed s/JOB/1/g`";
-feat-to-dim "$example_feats" -
-echo "feat-to-dim"
-echo $feat-to-dim
+
 
 
 if [ $stage -le -5 ]; then
